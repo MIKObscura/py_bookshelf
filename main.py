@@ -93,6 +93,8 @@ def add(args):
         for a in range(len(attr)):
             if attr[a].lower().strip() == "none":  # change the none strings to actual None so they can be inserted as null
                 attr[a] = None
+            else:
+                attr[a] = " ".join(w.capitalize() for w in attr[a].split(" ")) # capitalize each word so it's not case sensitive
         author = Author(attr[1], attr[2])
         book = Book(attr[0], author, attr[3])
         lib.add_book(book)
@@ -100,11 +102,14 @@ def add(args):
         for a in range(len(attr)):
             if attr[a].lower().strip() == "none":
                 attr[a] = None
+            else:
+                attr[a] = " ".join(w.capitalize() for w in attr[a].split(" "))
         author = Author(attr[0], attr[1], attr[2], attr[3], attr[4])
         if author in lib.authors:
             print("This author is already in the database")
             return
         lib.add_auth(author)
+    lib.update()
 
 
 def rand(args):
